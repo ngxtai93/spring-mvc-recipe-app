@@ -9,6 +9,7 @@ import tai.springmvcrecipeapp.repositories.CategoryRepository;
 import tai.springmvcrecipeapp.repositories.RecipeRepository;
 import tai.springmvcrecipeapp.repositories.UnitOfMeasureRepository;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -26,6 +27,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     }
 
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         recipeRepository.saveAll(getRecipes());
         log.debug("Loading Bootstrap Data");
