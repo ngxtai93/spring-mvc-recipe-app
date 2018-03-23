@@ -6,6 +6,7 @@ import tai.springmvcrecipeapp.domain.Recipe;
 import tai.springmvcrecipeapp.repositories.RecipeRepository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
@@ -28,5 +29,16 @@ public class RecipeServiceImpl implements RecipeService {
             .forEach(recipes::add)
         ;
         return recipes;
+    }
+
+    @Override
+    public Recipe findById(Long l) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
+
+        if(!recipeOptional.isPresent()) {
+            throw new RuntimeException("Recipe Not Found!");
+        }
+        return recipeOptional.get();
     }
 }
